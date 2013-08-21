@@ -1,0 +1,17 @@
+<html>
+<body>
+<script src="misc.js"></script>
+<script src="interface.js"></script>
+<script>
+
+var rpc = JSONRPCoverHTTP('electrum.udoidio.info', 80);
+
+rpc.onNewSession = function () {
+rpc.send([['server.version', ["1.8", "0.6"]]]);
+//rpc.send([['server.banner', []]]);
+
+};
+
+window.setInterval(function () { rpc.send([]); }, 1000);
+
+</script>
