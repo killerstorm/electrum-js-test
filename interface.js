@@ -67,7 +67,7 @@ var JSONRPCoverHTTP = (function (host, port) {
             
             if (xhr.responseText === "Error: session not found") {
               console.log("Session timed out, removing cookie.");
-              chrome.cookies.remove({ url: 'http://' + host + ":" + port, name: 'SESSION' });
+              //chrome.cookies.remove({ url: 'http://' + host + ":" + port, name: 'SESSION' });
               session_established = false;
               return;
             }
@@ -141,6 +141,10 @@ var JSONRPCoverHTTP = (function (host, port) {
       }
       
       var url = 'http://' + host + ":" + port + '/';
+
+      if (!session_established)
+          url += 'reset';
+
       if (outgoing.length) {
         xhr.open('POST', url, true);
         xhr.setRequestHeader("Content-type", "application/json");
